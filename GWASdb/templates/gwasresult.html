@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{{ super() }}
+	GWAS Result
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="container">
+			<h1>
+				GWAS Results
+			</h1>
+			<h4>
+				Here, we will eventually show the details of the GWAS Experiment you've just added.
+			</h4>
+			<hr />
+			<br />
+		</div>
+		<div class="jumbotron">
+		You've added a GWAS Experiment to the System.
+		<br />
+		Your GWAS is part of the {{ session.myPop }} population.
+
+		</div>
+	</div>
+{% endblock %}

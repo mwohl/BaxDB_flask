@@ -1,0 +1,80 @@
+{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>	
+{% block html_attribs %} lang="en" {% endblock %}
+<head>
+	{% block metas %}
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{{ super() }}
+	{% endblock %}
+	{% block title %}
+		Baxter GWAS |
+	{% endblock %}
+	{% block styles %}
+		{{ super() }}
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootswatch.sandstone.css') }}">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+	{% endblock %}
+</head>
+<body>
+	<div class="container">
+		{% block navbar %}
+		<nav class="navbar navbar-default navbar-fixed-top">
+	        <div class="navbar-inner">
+	            <div class="container" id="navbar-container">
+	            	<ul class="nav navbar-nav">
+		                <li {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url_for('index') }}">Home</a></li>
+		                <li {% if request.path == '/about' %}class="active"{% endif %}><a href="{{ url_for('about') }}">About</a></li>
+		                <li {% if request.path == '/addpopulation' %}class="active"{% endif %}><a href="{{ url_for('addPopulation') }}">Add a GWAS Experiment</a></li>
+		                <li><a href="">Search GWAS Database</a></li>
+		                <li><a href="">Related Projects</a></li>
+		                <li {% if request.path == '/contact' %}class="active"{% endif %}><a href="{{ url_for('contact') }}">Contact</a></li>
+	                </ul>
+		            <ul class="nav navbar-nav pull-right">    
+		                {% if 'email' in session %}
+		                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+		                <li><a href="{{ url_for('signout') }}">Sign Out</a></li>
+		                {% else %}
+		                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+		                <li><a href="{{ url_for('signin') }}">Sign In</a></li>
+		                {% endif %}
+	              	</ul>
+	            </div>
+	    </nav>
+	    </div>
+		{% endblock %}
+		
+		<main> 
+		<!-- Not sure if message flashing code should be inside block content or here(?) -->
+		<div class="container">
+			{% for message in get_flashed_messages() %}
+				<div class="alert alert-warning">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					{{ message }}
+				</div>a
+			{% endfor %}
+		</div> 	
+    	{% block content %}		
+    	{{ super() }}
+		{% endblock %}
+	    </main>
+	    	
+    </div>
+
+	{% block scripts %}
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/JavaScript">
+			$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+		</script>
+		<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/lib/jquery/jquery-1.11.2.js') }}">\x3C/script>')</script>
+		<script type=text/JavaScript>
+			$(window).resize(function () {
+				$('body').css('padding-top', parseInt($('.navbar-fixed-top').css("height"))+10);
+			});
+			$(window).load(function () {
+				$('body').css('padding-top', parseInt($('.navbar-fixed-top').css("height"))+10);
+			});
+		</script>
+		{{ super() }}
+	{% endblock %}
+</body>
+</html>

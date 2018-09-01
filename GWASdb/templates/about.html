@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}
+	{{ super() }}
+	About
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<div class="container">
+			<h1>
+				About GWAS Manager
+			</h1>
+			<hr />
+			<br />
+		</div>
+		<div class="jumbotron">
+			<p>
+				The Baxter Lab GWAS Manager was created to manage the many Genome Wide Association Studies conducted in the lab.  The GWAS Manager serves as a central repository for all the the data associated with a GWAS, including the results.
+			</p>
+			<br />
+			<p>
+				Users can view past GWAS experiments.  Search functionality is under development with the eventual goal of allowing users to search through GWAS experiments on a number of different criteria.
+			</p>
+			<br />
+			<p>
+				Users can also use this site to add a new GWAS experiment to GWAS Manager.  
+			</p>
+			<hr />
+			<p>
+				<h2>What would you like to do?</h2>
+					<a href='addExperiment.php'><button class='btn btn-primary'>Add a New GWAS Experiment to the Database</button></a>
+					<a href='searchGWAS.php'><button class='btn btn-primary'>Search through Existing GWAS Experiments</button></a>
+			</p>
+		</div>
+	</div>
+{% endblock %}

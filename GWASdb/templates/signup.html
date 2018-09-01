@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+	{{ super() }}
+	Signup
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="container">
+			<h1>
+				Signup
+			</h1>
+			<h4>
+				New to GWAS Manager? Please fill in and submit the form below to register your new account.
+			</h4>
+			<hr />
+			<br />
+		</div>
+		<div class="jumbotron">
+			{{ wtf.quick_form(form, action="url_for('signup')", method="post") }}
+			
+			<!--{% for message in form.firstname.errors %}
+				<div class="flash"> {{ message }} </div>
+			{% endfor %}
+
+			{% for message in form.lastname.errors %}
+				<div class="flash"> {{ message }} </div>
+			{% endfor %}
+
+			{% for message in form.email.errors %}
+				<div class="flash"> {{ message }} </div>
+			{% endfor %}
+
+			{% for message in form.password.errors %}
+				<div class="flash"> {{ message }} </div>
+			{% endfor %}
+
+			<form action="{{ url_for('signup') }}" method="post">
+				{{ form.hidden_tag() }}
+
+				{{ form.firstname.label }}
+				{{ form.firstname }}
+
+				{{ form.lastname.label }}
+				{{ form.lastname }}
+
+				{{ form.email.label }}
+				{{ form.email }}
+
+				{{ form.password.label }}
+				{{ form.password }}
+
+				{{ form.submit }}
+			</form>-->
+
+		</div>
+	</div>
+{% endblock %}

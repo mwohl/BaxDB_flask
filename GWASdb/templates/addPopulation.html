@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+	{{ super() }}
+	Population
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+	    <div class="container btn-toolbar">
+            <div class="row btn-group">
+                <a href="{{ url_for('addPopulation') }}" class="btn btn-info">
+                    <div class="col-lg-2">
+                        <h1>
+                            </span>Step 1
+                        </h1>
+                        <h4>
+                            Population
+                        </h4>
+                    </div>
+                </a>
+                <a href="{{ url_for('addGenotype') }}" class="btn btn-info-secondary">
+                    <div class="col-lg-2">
+                        <h1>
+                            Step 2
+                        </h1>
+                        <h4>
+                            Genotype
+                        </h4>
+                    </div>
+                </a>
+                <a href="{{ url_for('addPhenotype') }}" class="btn btn-info-secondary">
+                    <div class="col-lg-2">
+                        <h1>
+                            Step 3
+                        </h1>
+                        <h4>
+                            Phenotype
+                        </h4>
+                    </div>
+                </a>
+                <a href="{{ url_for('addDataProcessing') }}" class="btn btn-info-secondary">
+                    <div class="col-lg-2">
+                        <h1>
+                            Step 4
+                        </h1>
+                        <h4>
+                            Data Processing
+                        </h4>
+                    </div>
+                </a>
+                <a href="{{ url_for('addGWAS') }}" class="btn btn-info-secondary">
+                    <div class="col-lg-2">
+                        <h1>
+                            Step 5
+                        </h1>
+                        <h4>
+                            GWAS
+                        </h4>
+                    </div>
+                </a>
+                <a href="{{ url_for('addResult') }}" class="btn btn-info-secondary">
+                    <div class="col-lg-2">
+                        <h1>
+                            Step 6
+                        </h1>
+                        <h4>
+                            Results
+                        </h4>
+                    </div>
+                </a>
+        	</div>
+        </div>
+        <hr>
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-lg-6">
+					<h3>Select an Existing Population...</h3>
+					{{ wtf.quick_form(formA, action="", method="POST") }}
+				</div>
+				<div class="col-lg-6">
+					<h3>...or Add a New Population</h3>
+					{{ wtf.quick_form(formB, action="url_for('addpopulation')", method="POST") }}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block scripts %}
+	{{ super() }}
+	<script type="text/JavaScript">
+		$('#organism').on('change', function (e) {
+			var optionSelected = $(this).find("option:selected");
+			var textSelected = optionSelected.text();
+			console.log("text selected: " + textSelected);
+			
+			$.ajax({
+				type: "POST",
+				url: $SCRIPT_ROOT + '/testAJAX',
+				timeout: 2000,
+				data: JSON.stringify(textSelected),
+				dataType: 'json',
+				contentType: 'application/json; charset=utf-8',
+				beforeSend: function() {
+					console.log('log test before ajax request sent');
+				},
+				success: function(data) {
+					console.log(data.popList);
+					var popList = data.popList;
+					var opts = "";
+					for(i in popList) {
+						opts += "<option value='"+popList[i]+"'>"+popList[i]+"</option>";
+					}
+					$('#population').empty().append(opts);
+				},
+				fail: function() {
+					console.log('oh sad, it looks like something failed.');
+				}
+			});
+		});
+	</script>
+{% endblock %}

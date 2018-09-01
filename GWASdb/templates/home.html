@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	{{ super() }}
+	Home
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="container">
+			<h1>
+				Welcome to Baxter Lab GWAS Manager
+			</h1>
+			<h4>
+				A searchable store for GWAS experiments done in the Baxter Lab at the Donald Danforth Plant Science Center
+			</h4>
+			<hr />
+			<br />
+		</div>
+		<div class="jumbotron">
+			<p>
+				<h4>What would you like to do?</h4>
+					<a href="{{ url_for('addPopulation') }}"><button class='btn btn-primary'>Add a New GWAS Experiment to the Database</button></a>
+					<a href='searchGWAS.php'><button class='btn btn-primary'>Search through Existing GWAS Experiments</button></a>
+			</p>
+		</div>
+		<p>
+		<a href=# id="getData">get data</a>
+		</p>
+	</div>
+{% endblock %}
+{% block scripts %}
+	{{ super() }}
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#getData").click(function() {
+				$.getJSON('/lotsofdata', function(dat) {
+					console.log("Ajax received data!");
+					console.dir(dat);
+				});
+			});
+		});
+	</script>
+{% endblock %}

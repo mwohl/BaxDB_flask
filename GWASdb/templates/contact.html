@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+	{{ super() }}
+	Contact
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="container">
+			<h1>
+				Contact
+			</h1>
+			<h4>
+				Questions or comments?  Please fill out and submit the form below.
+			</h4>
+			<hr />
+			<br />
+		</div>
+		<div class="jumbotron">
+
+			{% if success %}
+				<p>Thank you for contacting us.  Your message has been sent.  We will respond promptly.</p>
+			{% else %}
+
+			{{ wtf.quick_form(form, action="url_for('contact')", method="post") }}
+
+				<!--{% for message in form.name.errors %}
+					<div class="flash">{{ message }}</div>
+				{% endfor %}
+
+				{% for message in form.email.errors %}
+					<div class="flash">{{ message }}</div>
+				{% endfor %}
+
+				{% for message in form.subject.errors %}
+					<div class="flash">{{ message }}</div>
+				{% endfor %}
+
+				{% for message in form.message.errors %}
+					<div class="flash">{{ message }}</div>
+				{% endfor %}
+
+				<form action="{{ url_for('contact') }}" method=post>
+					{{ form.hidden_tag() }}
+
+					{{ form.name.label }}
+					{{ form.name }}
+
+					{{ form.email.label }}
+					{{ form.email }}
+
+					{{ form.subject.label }}
+					{{ form.subject }}
+
+					{{ form.message.label }}
+					{{ form.message }}
+
+					{{ form.submit }}
+				</form>-->
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

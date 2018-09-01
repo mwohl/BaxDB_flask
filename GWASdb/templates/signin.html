@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+	{{ super() }}
+	Signin
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="container">
+			<h1>
+				Signin
+			</h1>
+			<h4>
+				Existing users sign in below
+			</h4>
+			<hr />
+			<br />
+		</div>
+		<div class="jumbotron">
+			{{ wtf.quick_form(form, action="url_for('signin')", method="post") }}
+			<!--{% for message in form.email.errors %}
+				<div class="flash">{{ message }}</div>
+			{% endfor %}
+
+			{% for message in form.password.errors %}
+				<div class="flash">{{ message }}</div>
+			{% endfor %}
+
+			<form action="{{ url_for('signin') }}" method=post>
+				{{ form.hidden_tag() }}
+
+				{{ form.email.label }}
+				{{ form.email }}
+
+				{{ form.password.label }}
+				{{ form.password }}
+
+				{{ form.submit }}
+			</form>-->
+		</div>
+	</div>
+{% endblock %}
